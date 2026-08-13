@@ -1,0 +1,22 @@
+flowchart TB
+  subgraph NOW["Prototype - implemented"]
+    direction LR
+    P1["React / TypeScript UI"] --> P2["Reducer + seeded domain state"]
+    P2 --> P3["Pure finance functions"]
+    P2 --> P4["Validated memo API + deterministic composer"]
+    P4 --> P5["Evidence-linked Draft v3"]
+  end
+
+  subgraph PROD["Production direction"]
+    direction LR
+    U["Web UI"] --> A["Application API"]
+    A --> R[("Underwriting + audit database")]
+    A --> O[("Versioned document storage")]
+    O --> X["Structured extraction / model service"]
+    X --> V["Provenance + human review"]
+    V --> R
+    A --> F["Deterministic finance"]
+    A --> C["Client-system adapters (not implemented)"]
+  end
+
+  P2 -. "same domain contracts" .-> A

@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title description">
+  <title id="title">Three-day assessment development timeline</title>
+  <desc id="description">Eight hours of work across three days. Day one: three hours of analysis, domain study, planning, and refinement. Day two: two hours of Task 1 development and review plus Task 2 development. Day three: three hours of Task 2 development, deployment, documentation, requirements review, and video recording.</desc>
+
+  <rect width="1600" height="900" fill="#F7F9F6"/>
+  <rect x="0" y="0" width="1600" height="12" fill="#102820"/>
+
+  <text x="72" y="76" fill="#168263" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" letter-spacing="3">ASSESSMENT DELIVERY</text>
+  <text x="72" y="130" fill="#17251F" font-family="Georgia, 'Times New Roman', serif" font-size="52">3 days · 8 focused hours</text>
+  <text x="72" y="170" fill="#64716B" font-family="Arial, Helvetica, sans-serif" font-size="21">From problem framing and domain study to a deployed prototype and recorded walkthrough.</text>
+
+  <!-- Day 1 -->
+  <line x1="116" y1="251" x2="116" y2="684" stroke="#BBC7C0" stroke-width="4"/>
+  <circle cx="116" cy="263" r="34" fill="#168263"/>
+  <text x="116" y="272" text-anchor="middle" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">1</text>
+  <text x="174" y="254" fill="#17251F" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700">Day 1 · 3h</text>
+  <text x="174" y="286" fill="#64716B" font-family="Arial, Helvetica, sans-serif" font-size="18">Discover + plan</text>
+
+  <rect x="340" y="225" width="1150" height="76" rx="10" fill="#EDF1EE"/>
+  <rect x="340" y="225" width="383.33" height="76" rx="10" fill="#D5EAE2"/>
+  <rect x="723.33" y="225" width="383.33" height="76" fill="#B9DDCF"/>
+  <rect x="1106.66" y="225" width="287.50" height="76" fill="#F1DFB8"/>
+  <rect x="1394.16" y="225" width="95.84" height="76" rx="10" fill="#E9C2B8"/>
+  <line x1="723.33" y1="225" x2="723.33" y2="301" stroke="#F7F9F6" stroke-width="3"/>
+  <line x1="1106.66" y1="225" x2="1106.66" y2="301" stroke="#F7F9F6" stroke-width="3"/>
+  <line x1="1394.16" y1="225" x2="1394.16" y2="301" stroke="#F7F9F6" stroke-width="3"/>
+  <text x="531.66" y="256" text-anchor="middle" fill="#17251F" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">Task analysis</text>
+  <text x="531.66" y="280" text-anchor="middle" fill="#355047" font-family="Arial, Helvetica, sans-serif" font-size="17">1h</text>
+  <text x="914.99" y="256" text-anchor="middle" fill="#17251F" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">PE / private credit study</text>
+  <text x="914.99" y="280" text-anchor="middle" fill="#355047" font-family="Arial, Helvetica, sans-serif" font-size="17">1h</text>
+  <text x="1250.41" y="256" text-anchor="middle" fill="#17251F" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">Multi-step plan</text>
+  <text x="1250.41" y="280" text-anchor="middle" fill="#76571E" font-family="Arial, Helvetica, sans-serif" font-size="17">45m</text>
+  <text x="1442.08" y="271" text-anchor="middle" fill="#823A2D" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700">15m</text>
+  <text x="1394" y="327" text-anchor="end" fill="#8A4B3E" font-family="Arial, Helvetica, sans-serif" font-size="16">Review + refine</text>
+  <line x1="1407" y1="315" x2="1442" y2="302" stroke="#B84D3A" stroke-width="2"/>
+
+  <!-- Day 2 -->
+  <circle cx="116" cy="458" r="34" fill="#168263"/>
+  <text x="116" y="467" text-anchor="middle" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">2</text>
+  <text x="174" y="449" fill="#17251F" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700">Day 2 · 2h</text>
+  <text x="174" y="481" fill="#64716B" font-family="Arial, Helvetica, sans-serif" font-size="19">Build + complete</text>
+
+  <rect x="340" y="420" width="1150" height="76" rx="10" fill="#EDF1EE"/>
+  <rect x="340" y="420" width="191.67" height="76" rx="10" fill="#168263"/>
+  <rect x="531.67" y="420" width="191.67" height="76" fill="#E9C2B8"/>
+  <rect x="723.34" y="420" width="383.33" height="76" rx="10" fill="#168263"/>
+  <line x1="531.67" y1="420" x2="531.67" y2="496" stroke="#F7F9F6" stroke-width="3"/>
+  <line x1="723.34" y1="420" x2="723.34" y2="496" stroke="#F7F9F6" stroke-width="3"/>
+  <text x="435.83" y="451" text-anchor="middle" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700">Task 1 build</text>
+  <text x="435.83" y="475" text-anchor="middle" fill="#E8F4EF" font-family="Arial, Helvetica, sans-serif" font-size="16">30m</text>
+  <text x="627.50" y="451" text-anchor="middle" fill="#6F3026" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700">Task 1 review</text>
+  <text x="627.50" y="475" text-anchor="middle" fill="#8A4B3E" font-family="Arial, Helvetica, sans-serif" font-size="16">30m</text>
+  <text x="915.00" y="451" text-anchor="middle" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">Task 2 build</text>
+  <text x="915.00" y="475" text-anchor="middle" fill="#E8F4EF" font-family="Arial, Helvetica, sans-serif" font-size="17">1h</text>
+  <text x="1124" y="467" fill="#8A958F" font-family="Arial, Helvetica, sans-serif" font-size="16">1h not scheduled on this day</text>
+
+  <!-- Day 3 -->
+  <circle cx="116" cy="653" r="34" fill="#102820"/>
+  <text x="116" y="662" text-anchor="middle" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">3</text>
+  <text x="174" y="644" fill="#17251F" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700">Day 3 · 3h</text>
+  <text x="174" y="676" fill="#64716B" font-family="Arial, Helvetica, sans-serif" font-size="19">Ship + present</text>
+
+  <rect x="340" y="615" width="1150" height="76" rx="10" fill="#EDF1EE"/>
+  <rect x="340" y="615" width="383.33" height="76" rx="10" fill="#168263"/>
+  <rect x="723.33" y="615" width="191.67" height="76" fill="#E9C2B8"/>
+  <rect x="915.00" y="615" width="191.67" height="76" fill="#D8E5E9"/>
+  <rect x="1106.67" y="615" width="191.67" height="76" fill="#B9DDCF"/>
+  <rect x="1298.34" y="615" width="191.66" height="76" rx="10" fill="#102820"/>
+  <line x1="723.33" y1="615" x2="723.33" y2="691" stroke="#F7F9F6" stroke-width="3"/>
+  <line x1="915.00" y1="615" x2="915.00" y2="691" stroke="#F7F9F6" stroke-width="3"/>
+  <line x1="1106.67" y1="615" x2="1106.67" y2="691" stroke="#F7F9F6" stroke-width="3"/>
+  <line x1="1298.34" y1="615" x2="1298.34" y2="691" stroke="#F7F9F6" stroke-width="3"/>
+  <text x="531.66" y="646" text-anchor="middle" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">Task 2 build</text>
+  <text x="531.66" y="670" text-anchor="middle" fill="#E8F4EF" font-family="Arial, Helvetica, sans-serif" font-size="17">1h</text>
+  <text x="819.16" y="646" text-anchor="middle" fill="#6F3026" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700">Review + deploy</text>
+  <text x="819.16" y="670" text-anchor="middle" fill="#8A4B3E" font-family="Arial, Helvetica, sans-serif" font-size="16">30m</text>
+  <text x="1010.83" y="646" text-anchor="middle" fill="#243D4A" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700">Documents</text>
+  <text x="1010.83" y="670" text-anchor="middle" fill="#456172" font-family="Arial, Helvetica, sans-serif" font-size="16">30m</text>
+  <text x="1202.50" y="646" text-anchor="middle" fill="#17251F" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">Requirements check</text>
+  <text x="1202.50" y="670" text-anchor="middle" fill="#355047" font-family="Arial, Helvetica, sans-serif" font-size="16">30m</text>
+  <text x="1394.17" y="646" text-anchor="middle" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700">Video recording</text>
+  <text x="1394.17" y="670" text-anchor="middle" fill="#D7E2DD" font-family="Arial, Helvetica, sans-serif" font-size="16">30m</text>
+
+  <!-- Shared scale and legend -->
+  <line x1="340" y1="738" x2="1490" y2="738" stroke="#BBC7C0" stroke-width="2"/>
+  <line x1="340" y1="732" x2="340" y2="744" stroke="#89978F" stroke-width="2"/>
+  <line x1="723.33" y1="732" x2="723.33" y2="744" stroke="#89978F" stroke-width="2"/>
+  <line x1="1106.66" y1="732" x2="1106.66" y2="744" stroke="#89978F" stroke-width="2"/>
+  <line x1="1490" y1="732" x2="1490" y2="744" stroke="#89978F" stroke-width="2"/>
+  <text x="340" y="769" text-anchor="middle" fill="#64716B" font-family="Arial, Helvetica, sans-serif" font-size="16">0h</text>
+  <text x="723.33" y="769" text-anchor="middle" fill="#64716B" font-family="Arial, Helvetica, sans-serif" font-size="16">1h</text>
+  <text x="1106.66" y="769" text-anchor="middle" fill="#64716B" font-family="Arial, Helvetica, sans-serif" font-size="16">2h</text>
+  <text x="1490" y="769" text-anchor="middle" fill="#64716B" font-family="Arial, Helvetica, sans-serif" font-size="16">3h</text>
+
+  <g transform="translate(340, 824)">
+    <circle cx="0" cy="0" r="7" fill="#B9DDCF"/>
+    <text x="17" y="6" fill="#4F5F57" font-family="Arial, Helvetica, sans-serif" font-size="16">Discover</text>
+    <circle cx="155" cy="0" r="7" fill="#F1DFB8"/>
+    <text x="172" y="6" fill="#4F5F57" font-family="Arial, Helvetica, sans-serif" font-size="16">Plan</text>
+    <circle cx="274" cy="0" r="7" fill="#168263"/>
+    <text x="291" y="6" fill="#4F5F57" font-family="Arial, Helvetica, sans-serif" font-size="16">Build</text>
+    <circle cx="390" cy="0" r="7" fill="#E9C2B8"/>
+    <text x="407" y="6" fill="#4F5F57" font-family="Arial, Helvetica, sans-serif" font-size="16">Review + deploy</text>
+    <circle cx="584" cy="0" r="7" fill="#D8E5E9"/>
+    <text x="601" y="6" fill="#4F5F57" font-family="Arial, Helvetica, sans-serif" font-size="16">Document</text>
+    <circle cx="731" cy="0" r="7" fill="#102820"/>
+    <text x="748" y="6" fill="#4F5F57" font-family="Arial, Helvetica, sans-serif" font-size="16">Present</text>
+  </g>
+</svg>

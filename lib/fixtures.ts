@@ -1,0 +1,556 @@
+import type {
+  BorrowerCompany,
+  Deal,
+  DiligenceItem,
+  Document,
+  DocumentVersion,
+  Evidence,
+  Finding,
+  MemoVersion,
+  Security,
+  SourceAssertion,
+  UnderwritingSelection,
+} from "./domain";
+import { calculateMetrics } from "./finance";
+
+export const borrowerCompanies: readonly BorrowerCompany[] = [
+  {
+    id: "borrower-atlas",
+    name: "Atlas Industrial Services",
+    sector: "Industrial Services",
+  },
+  {
+    id: "borrower-meridian",
+    name: "Meridian Healthcare Partners",
+    sector: "Healthcare Services",
+  },
+  {
+    id: "borrower-redwood",
+    name: "Redwood Software Group",
+    sector: "Vertical Software",
+  },
+] as const;
+
+export const atlasBorrower = borrowerCompanies[0];
+
+export const atlasDeal: Deal = {
+  id: "atlas",
+  slug: "atlas",
+  name: "Atlas Industrial Services",
+  borrowerId: "borrower-atlas",
+  sponsor: "Northstar Capital Partners",
+  sector: "Industrial Services",
+  stage: "diligence",
+  status: "active",
+  overview:
+    "Sponsor-backed provider of recurring maintenance and inspection services to industrial facilities.",
+  currency: "USD",
+  netDebtUsdM: 132,
+  covenantLeverageX: 5.75,
+  downsidePct: 0.2,
+  financialAssertionIds: {
+    netDebt: "assertion-net-debt-132",
+    covenantLeverage: "assertion-covenant-leverage-5-75",
+  },
+};
+
+export const deals: readonly Deal[] = [
+  atlasDeal,
+  {
+    id: "meridian",
+    slug: "meridian",
+    name: "Meridian Healthcare Partners",
+    borrowerId: "borrower-meridian",
+    sponsor: "Beacon Ridge Equity",
+    sector: "Healthcare Services",
+    stage: "diligence",
+    status: "preview",
+    overview: "Static preview deal used to demonstrate the opportunity list.",
+    currency: "USD",
+    netDebtUsdM: 86,
+    covenantLeverageX: 5.5,
+    downsidePct: 0.2,
+  },
+  {
+    id: "redwood",
+    slug: "redwood",
+    name: "Redwood Software Group",
+    borrowerId: "borrower-redwood",
+    sponsor: "Summit Harbor Partners",
+    sector: "Vertical Software",
+    stage: "screening",
+    status: "preview",
+    overview: "Static preview deal used to demonstrate the opportunity list.",
+    currency: "USD",
+    netDebtUsdM: 54,
+    covenantLeverageX: 5,
+    downsidePct: 0.2,
+  },
+] as const;
+
+export const atlasSecurities: readonly Security[] = [
+  {
+    id: "security-atlas-first-lien",
+    dealId: "atlas",
+    name: "$120m First-Lien Term Loan",
+    type: "term_loan",
+    lien: "first_lien",
+    commitmentUsdM: 120,
+    drawnUsdM: 120,
+    spreadBps: 550,
+    floorPct: 0.01,
+    maturityDate: "2031-06-30",
+    amortizationPct: 0.01,
+  },
+  {
+    id: "security-atlas-revolver",
+    dealId: "atlas",
+    name: "$25m Revolving Credit Facility",
+    type: "revolver",
+    lien: "first_lien",
+    commitmentUsdM: 25,
+    drawnUsdM: 12,
+    spreadBps: 500,
+    floorPct: 0.01,
+    maturityDate: "2030-06-30",
+    amortizationPct: 0,
+  },
+] as const;
+
+export const atlasDocuments: readonly Document[] = [
+  {
+    id: "doc-management-materials",
+    dealId: "atlas",
+    name: "Management Materials",
+    kind: "management_materials",
+    currentVersionId: "doc-version-management-v1",
+  },
+  {
+    id: "doc-qoe",
+    dealId: "atlas",
+    name: "Quality of Earnings Report",
+    kind: "quality_of_earnings",
+    currentVersionId: "doc-version-qoe-v1",
+  },
+  {
+    id: "doc-customer-concentration",
+    dealId: "atlas",
+    name: "Customer Concentration Schedule",
+    kind: "customer_schedule",
+    currentVersionId: "doc-version-customer-v1",
+  },
+  {
+    id: "doc-credit-agreement",
+    dealId: "atlas",
+    name: "Draft Credit Agreement",
+    kind: "credit_agreement",
+    currentVersionId: "doc-version-credit-agreement-v1",
+  },
+] as const;
+
+export const atlasDocumentVersions: readonly DocumentVersion[] = [
+  {
+    id: "doc-version-management-v1",
+    documentId: "doc-management-materials",
+    versionLabel: "v1",
+    approvalStatus: "reviewed",
+    effectiveDate: "2026-07-15",
+    isSynthetic: true,
+    materializationSource: "static_demo_data",
+    sections: ["Adjusted EBITDA", "Capitalization"],
+  },
+  {
+    id: "doc-version-qoe-v1",
+    documentId: "doc-qoe",
+    versionLabel: "v1",
+    approvalStatus: "reviewed",
+    effectiveDate: "2026-07-29",
+    isSynthetic: true,
+    materializationSource: "static_demo_data",
+    sections: ["EBITDA Normalization"],
+  },
+  {
+    id: "doc-version-customer-v1",
+    documentId: "doc-customer-concentration",
+    versionLabel: "v1",
+    approvalStatus: "reviewed",
+    effectiveDate: "2026-07-26",
+    isSynthetic: true,
+    materializationSource: "static_demo_data",
+    sections: ["Revenue by Customer"],
+  },
+  {
+    id: "doc-version-credit-agreement-v1",
+    documentId: "doc-credit-agreement",
+    versionLabel: "v1",
+    approvalStatus: "draft",
+    effectiveDate: "2026-08-01",
+    isSynthetic: true,
+    materializationSource: "static_demo_data",
+    sections: ["Financial Covenants"],
+  },
+] as const;
+
+export const atlasEvidence: readonly Evidence[] = [
+  {
+    id: "evidence-management-ebitda",
+    dealId: "atlas",
+    documentVersionId: "doc-version-management-v1",
+    sectionLabel: "Adjusted EBITDA",
+    excerpt:
+      "Management presents LTM adjusted EBITDA of $33.0m, inclusive of $3.0m of run-rate and normalization adjustments.",
+    semanticOrigin: "source_observation",
+    materializationSource: "static_demo_data",
+    isSynthetic: true,
+  },
+  {
+    id: "evidence-qoe-ebitda-normalization",
+    dealId: "atlas",
+    documentVersionId: "doc-version-qoe-v1",
+    sectionLabel: "EBITDA Normalization",
+    excerpt:
+      "QoE-supported LTM adjusted EBITDA is $30.0m after excluding $3.0m of adjustments that are not sufficiently supported by realized savings.",
+    semanticOrigin: "source_observation",
+    materializationSource: "static_demo_data",
+    isSynthetic: true,
+  },
+  {
+    id: "evidence-customer-concentration",
+    dealId: "atlas",
+    documentVersionId: "doc-version-customer-v1",
+    sectionLabel: "Revenue by Customer",
+    excerpt:
+      "The largest customer accounts for 32% of LTM revenue.",
+    semanticOrigin: "source_observation",
+    materializationSource: "static_demo_data",
+    isSynthetic: true,
+  },
+  {
+    id: "evidence-debt-capitalization",
+    dealId: "atlas",
+    documentVersionId: "doc-version-management-v1",
+    sectionLabel: "Capitalization",
+    excerpt:
+      "Pro forma debt consists of a $120m first-lien term loan and $12m drawn under a $25m revolving facility, for $132m of net debt.",
+    semanticOrigin: "source_observation",
+    materializationSource: "static_demo_data",
+    isSynthetic: true,
+  },
+  {
+    id: "evidence-financial-covenant",
+    dealId: "atlas",
+    documentVersionId: "doc-version-credit-agreement-v1",
+    sectionLabel: "Financial Covenants",
+    excerpt:
+      "The synthetic draft credit agreement contains a 5.75x maximum first-lien net leverage covenant.",
+    semanticOrigin: "source_observation",
+    materializationSource: "static_demo_data",
+    isSynthetic: true,
+  },
+] as const;
+
+export const atlasSourceAssertions: readonly SourceAssertion[] = [
+  {
+    id: "assertion-management-ebitda-33",
+    dealId: "atlas",
+    metric: "ebitda",
+    label: "Management adjusted EBITDA",
+    value: 33,
+    unit: "usd_m",
+    period: "LTM",
+    evidenceIds: ["evidence-management-ebitda"],
+    semanticOrigin: "source_observation",
+    materializationSource: "static_demo_data",
+  },
+  {
+    id: "assertion-qoe-ebitda-30",
+    dealId: "atlas",
+    metric: "ebitda",
+    label: "QoE-supported EBITDA",
+    value: 30,
+    unit: "usd_m",
+    period: "LTM",
+    evidenceIds: ["evidence-qoe-ebitda-normalization"],
+    semanticOrigin: "source_observation",
+    materializationSource: "static_demo_data",
+  },
+  {
+    id: "assertion-net-debt-132",
+    dealId: "atlas",
+    metric: "net_debt",
+    label: "Pro forma net debt",
+    value: 132,
+    unit: "usd_m",
+    period: "Pro forma",
+    evidenceIds: ["evidence-debt-capitalization"],
+    semanticOrigin: "source_observation",
+    materializationSource: "static_demo_data",
+  },
+  {
+    id: "assertion-covenant-leverage-5-75",
+    dealId: "atlas",
+    metric: "covenant_leverage",
+    label: "Maximum first-lien net leverage covenant",
+    value: 5.75,
+    unit: "turns",
+    period: "Draft credit agreement",
+    evidenceIds: ["evidence-financial-covenant"],
+    semanticOrigin: "source_observation",
+    materializationSource: "static_demo_data",
+  },
+] as const;
+
+export const atlasInitialSelection: UnderwritingSelection = {
+  id: "selection-atlas-ebitda-r1",
+  dealId: "atlas",
+  metric: "ebitda",
+  selectedAssertionId: "assertion-management-ebitda-33",
+  selectedBy: "Demo Analyst",
+  selectedAt: "2026-08-01T09:00:00.000Z",
+  rationale: "Initial management case pending QoE review.",
+  revision: 1,
+  semanticOrigin: "human_confirmed",
+  materializationSource: "static_demo_data",
+};
+
+export const atlasReviewedSelection: UnderwritingSelection = {
+  id: "selection-atlas-ebitda-r2",
+  dealId: "atlas",
+  metric: "ebitda",
+  selectedAssertionId: "assertion-qoe-ebitda-30",
+  selectedBy: "Demo Analyst",
+  selectedAt: "2026-08-12T12:00:00.000Z",
+  rationale: "Use QoE-supported EBITDA for reviewed underwriting.",
+  revision: 2,
+  semanticOrigin: "human_confirmed",
+  materializationSource: "static_demo_data",
+};
+
+export const atlasDiligenceItems: readonly DiligenceItem[] = [
+  {
+    id: "diligence-financial-qoe",
+    dealId: "atlas",
+    title: "Financial / QoE",
+    category: "financial",
+    status: "complete",
+    progressPct: 100,
+    documentIds: ["doc-management-materials", "doc-qoe"],
+    findingIds: ["finding-qoe-ebitda"],
+  },
+  {
+    id: "diligence-commercial",
+    dealId: "atlas",
+    title: "Commercial",
+    category: "commercial",
+    status: "in_progress",
+    progressPct: 80,
+    documentIds: ["doc-customer-concentration"],
+    findingIds: ["finding-customer-concentration"],
+  },
+  {
+    id: "diligence-legal",
+    dealId: "atlas",
+    title: "Legal",
+    category: "legal",
+    status: "in_progress",
+    progressPct: 65,
+    documentIds: ["doc-credit-agreement"],
+    findingIds: ["finding-covenant-headroom"],
+  },
+  {
+    id: "diligence-technology",
+    dealId: "atlas",
+    title: "Technology",
+    category: "technology",
+    status: "in_progress",
+    progressPct: 90,
+    documentIds: [],
+    findingIds: [],
+  },
+  {
+    id: "diligence-management",
+    dealId: "atlas",
+    title: "Management",
+    category: "management",
+    status: "complete",
+    progressPct: 100,
+    documentIds: ["doc-management-materials"],
+    findingIds: [],
+  },
+] as const;
+
+export const atlasFindings: readonly Finding[] = [
+  {
+    id: "finding-qoe-ebitda",
+    kind: "risk",
+    dealId: "atlas",
+    diligenceItemId: "diligence-financial-qoe",
+    title: "$3m EBITDA adjustment gap",
+    summary:
+      "QoE supports $30.0m of EBITDA versus management's $33.0m presentation.",
+    implication:
+      "Using management EBITDA understates leverage and downside covenant pressure.",
+    mitigant:
+      "Anchor underwriting to QoE-supported EBITDA and track delivery of excluded savings separately.",
+    severity: "high",
+    reviewStatus: "needs_review",
+    riskStatus: "open",
+    semanticOrigin: "model_drafted",
+    materializationSource: "static_demo_data",
+    evidenceIds: [
+      "evidence-management-ebitda",
+      "evidence-qoe-ebitda-normalization",
+    ],
+  },
+  {
+    id: "finding-customer-concentration",
+    kind: "risk",
+    dealId: "atlas",
+    diligenceItemId: "diligence-commercial",
+    title: "Top-customer concentration",
+    summary: "The largest customer represents 32% of LTM revenue.",
+    implication:
+      "A customer loss or repricing event could materially reduce EBITDA and debt-service capacity.",
+    mitigant:
+      "Require quarterly concentration reporting and test key-customer renewal assumptions.",
+    severity: "high",
+    reviewStatus: "confirmed",
+    riskStatus: "open",
+    semanticOrigin: "human_confirmed",
+    materializationSource: "static_demo_data",
+    evidenceIds: ["evidence-customer-concentration"],
+  },
+  {
+    id: "finding-covenant-headroom",
+    kind: "risk",
+    dealId: "atlas",
+    diligenceItemId: "diligence-legal",
+    title: "Thin downside covenant headroom",
+    summary:
+      "At QoE-supported EBITDA and a 20% downside, leverage is 5.50x against a synthetic 5.75x covenant.",
+    implication:
+      "Only 0.25x of headroom remains in the downside case, increasing amendment risk.",
+    mitigant:
+      "Seek tighter reporting, an equity-cure framework, and a minimum-liquidity covenant.",
+    severity: "medium",
+    reviewStatus: "confirmed",
+    riskStatus: "open",
+    semanticOrigin: "human_confirmed",
+    materializationSource: "static_demo_data",
+    evidenceIds: [
+      "evidence-qoe-ebitda-normalization",
+      "evidence-debt-capitalization",
+      "evidence-financial-covenant",
+    ],
+  },
+] as const;
+
+export const atlasMemoV2: MemoVersion = {
+  id: "memo-atlas-v2",
+  dealId: "atlas",
+  label: "Draft v2",
+  version: 2,
+  immutable: true,
+  materializationSource: "static_demo_data",
+  basedOnUnderwritingRevision: 1,
+  underwritingSelectionId: "selection-atlas-ebitda-r1",
+  createdAt: "2026-08-01T09:15:00.000Z",
+  createdBy: "Demo Analyst",
+  metrics: calculateMetrics({
+    netDebtUsdM: 132,
+    underwritingEbitdaUsdM: 33,
+    covenantLeverageX: 5.75,
+    downsidePct: 0.2,
+  }),
+  sections: [
+    {
+      id: "memo-atlas-v2-transaction-overview",
+      title: "Transaction Overview",
+      order: 1,
+      body: "Northstar Capital Partners is seeking sponsor-backed acquisition financing for Atlas Industrial Services through a $120m first-lien term loan and a $25m revolving facility.",
+      semanticOrigin: "human_entered",
+      materializationSource: "static_demo_data",
+      claims: [
+        {
+          id: "claim-v2-capitalization",
+          text: "The proposed capitalization includes a $120m first-lien term loan and a $25m revolving facility.",
+          semanticOrigin: "source_observation",
+          materializationSource: "static_demo_data",
+          evidenceIds: ["evidence-debt-capitalization"],
+          assertionIds: ["assertion-net-debt-132"],
+        },
+      ],
+    },
+    {
+      id: "memo-atlas-v2-quality-of-earnings",
+      title: "Financial Performance & Quality of Earnings",
+      order: 2,
+      body: "Draft v2 uses $33.0m of management adjusted EBITDA while the conflicting QoE assertion awaits reviewer confirmation.",
+      semanticOrigin: "human_entered",
+      materializationSource: "static_demo_data",
+      claims: [
+        {
+          id: "claim-v2-management-ebitda",
+          text: "Management adjusted EBITDA is $33.0m.",
+          semanticOrigin: "source_observation",
+          materializationSource: "static_demo_data",
+          evidenceIds: ["evidence-management-ebitda"],
+          assertionIds: ["assertion-management-ebitda-33"],
+        },
+      ],
+    },
+    {
+      id: "memo-atlas-v2-base-downside",
+      title: "Base / Downside Case",
+      order: 3,
+      body: "Net leverage is 4.00x. Under a 20% EBITDA downside, leverage reaches 5.00x, leaving 0.75x of modeled headroom to the synthetic 5.75x covenant.",
+      semanticOrigin: "system_composed",
+      materializationSource: "static_demo_data",
+      claims: [
+        {
+          id: "claim-v2-downside-metrics",
+          text: "At a 20% downside, leverage is 5.00x with 0.75x of covenant headroom.",
+          semanticOrigin: "system_composed",
+          materializationSource: "static_demo_data",
+          evidenceIds: [
+            "evidence-management-ebitda",
+            "evidence-debt-capitalization",
+            "evidence-financial-covenant",
+          ],
+          assertionIds: [
+            "assertion-management-ebitda-33",
+            "assertion-net-debt-132",
+            "assertion-covenant-leverage-5-75",
+          ],
+        },
+      ],
+    },
+    {
+      id: "memo-atlas-v2-key-risks",
+      title: "Key Risks & Mitigants",
+      order: 4,
+      body: "Customer concentration and downside covenant capacity require monitoring.",
+      semanticOrigin: "human_entered",
+      materializationSource: "static_demo_data",
+      claims: [
+        {
+          id: "claim-v2-customer-concentration",
+          text: "The largest customer represents 32% of LTM revenue.",
+          semanticOrigin: "human_confirmed",
+          materializationSource: "static_demo_data",
+          evidenceIds: ["evidence-customer-concentration"],
+          findingId: "finding-customer-concentration",
+        },
+      ],
+    },
+    {
+      id: "memo-atlas-v2-recommendation",
+      title: "Recommendation",
+      order: 5,
+      body: "Analyst recommendation: Not entered. The prototype supports decision preparation; it does not make an autonomous credit decision.",
+      semanticOrigin: "human_entered",
+      materializationSource: "static_demo_data",
+      claims: [],
+    },
+  ],
+};
